@@ -8,8 +8,20 @@ import  Credit from './Credit';
 import  Image from './Image';
 import  Explanation from './Explanation';
 
+import styled from 'styled-components';
 
+const StyledApp = styled.div`
+  background-color: ${pr => pr.theme.prussianBlue};
+  padding: 10px 25px;
 
+  h1 {
+    color: ${pr => pr.theme.blueGreen};
+    margin-top: 50px;
+    padding: 25px 0;
+    border: dotted 10px ${pr => pr.theme.honeyYellow};
+  }
+
+`
 
 
 function App() {
@@ -19,7 +31,6 @@ function App() {
   useEffect(() => {
     axios.get(`${BASE_URL}?api_key=${API_KEY}`)
       .then(res => {
-        console.log(res.data)
         setNasaData(res.data)
       })
       .catch(err => {
@@ -28,16 +39,16 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <p>
+    <StyledApp className="App">
+      <h1>
         Nasa Daily Photograph <span role="img" aria-label='go!'>🚀</span>!
-      </p>
+      </h1>
       < Date date={nasaData.date} />
       < Title title={nasaData.title} />
       < Credit copyright={nasaData.copyright} />
       < Image image={nasaData.url} />
       < Explanation explanation={nasaData.explanation} />
-    </div>
+    </StyledApp>
   );
 }
 
